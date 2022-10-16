@@ -12,20 +12,20 @@ ARG CUDA_VERSION_CONDA
 # https://pytorch.org/get-started/locally/
 # ------------------------------------------------------------------------------
 
-RUN conda install \
-        pytorch=${TORCH_VERSION} \
-        torchvision=${TORCHVISION_VERSION} \
-        torchaudio=${TORCHAUDIO_VERSION} \
-        cudatoolkit=${CUDA_VERSION_CONDA} \
-        -c pytorch \
+RUN export CU_VERSION=$(echo ${CUDA_VERSION%.*} | tr -d \.) && \
+    pip install \
+            torch==${TORCH_VERSION}+cu${CU_VERSION}\
+            torchvision==${TORCHVISION_VERSION}+cu${CU_VERSION} \
+            torchaudio==${TORCHAUDIO_VERSION} \
+            -f https://download.pytorch.org/whl/torch_stable.html \
+            && \
+
+    conda install \
+        skorch \
+        pytorch-lightning \
         -c conda-forge \
         && \
-    # conda install \
-    #     skorch \
-    #     pytorch-lightning \
-    #     -c conda-forge \
-    #     && \
-    # conda install tensorboard && \
+    conda install tensorboard && \
 
 # ------------------------------------------------------------------------------
 # config & cleanup

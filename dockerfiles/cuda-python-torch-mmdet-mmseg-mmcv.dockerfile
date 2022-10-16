@@ -4,9 +4,8 @@ ARG BASE
 FROM ${REPO}:${BASE}
 
 ARG MMCV_VERSION
-ARG MMSEG_VERSION
 ARG MMDET_VERSION
-ARG MMDET3D_VERSION
+ARG MMSEG_VERSION
 
 # ------------------------------------------------------------------------------
 # mmdet3d dependencies
@@ -19,18 +18,10 @@ RUN export CU_VERSION=$(echo ${CUDA_VERSION%.*} | tr -d \.) && \
         mmcv-full==${MMCV_VERSION} \
         -f https://download.openmmlab.com/mmcv/dist/cu${CU_VERSION}/torch${TORCH_VERSION}/index.html && \
 
-
     pip install \
-        open3d \
         mmsegmentation==${MMSEG_VERSION} \
         mmdet==${MMDET_VERSION} \
         && \
-
-    git clone --depth=1 --single-branch --recursive --branch v${MMDET3D_VERSION} \
-    https://github.com/open-mmlab/mmdetection3d.git ~/mmdet3d && \
-    pip install -r ~/mmdet3d/requirements/build.txt && \
-    pip install -r ~/mmdet3d/requirements/runtime.txt && \
-
 
 # ------------------------------------------------------------------------------
 # config & cleanup
