@@ -67,10 +67,12 @@ check_return () {
 check_port () {
     re='^[0-9]+$'
     if ! [[ $1 =~ $re ]] ; then
+        echo $1
         error "Invalid port $1\n"
         exit 1
     fi
     if [[ $1 -lt 1 || $1 -gt 65535 ]] ; then
+        echo $1
         error "Invalid port $1\n"
         exit 1
     fi
@@ -142,7 +144,7 @@ check_args () {
     check_return
 
     check_port $jupyter_port
-    check_port $tb_port
+    # check_port $tb_port
 }
 
 inject_variables () {
