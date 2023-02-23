@@ -4,6 +4,7 @@ from configparser import ConfigParser, ExtendedInterpolation
 
 def build(repo, tag):
     config = ConfigParser(interpolation=ExtendedInterpolation())
+    print(repo,tag)
     config.read(f'tags/{tag}.ini')
 
     # Build base image recursively
@@ -48,5 +49,7 @@ def build(repo, tag):
 
 
 if __name__ == '__main__':
+    print(sys.argv[1])
+    print('ok')
     name = sys.argv[1].split(':')
     build(name[0], name[1])
