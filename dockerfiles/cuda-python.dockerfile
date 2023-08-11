@@ -68,6 +68,14 @@ RUN set -x && \
 
         # -c conda-forge \
         && \
+    
+    pip install \
+        # logging
+        neptune-client \
+        wandb \
+
+        && \
+
 
 
 # ------------------------------------------------------------------------------

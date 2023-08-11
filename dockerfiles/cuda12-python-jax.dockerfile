@@ -1,0 +1,25 @@
+ARG REPO
+ARG BASE
+
+FROM ${REPO}:${BASE}
+
+COPY dockerfiles/setenv.sh /setenv.sh
+ENTRYPOINT ["/setenv.sh"]
+
+# ------------------------------------------------------------------------------
+# PyTorch
+# https://pytorch.org/get-started/locally/
+# ------------------------------------------------------------------------------
+
+RUN pip install --upgrade pip && \
+    pip install --upgrade "jax[cuda12_local]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
+        black \
+        dm-haiku==0.0.9 \
+        pip install --no-cache-dir git+https://github.com/lefameuxbeding/learned_optimization \
+        && \
+
+# ------------------------------------------------------------------------------
+# config & cleanup
+# ------------------------------------------------------------------------------
+
+    rm -rf /tmp/* ~/*

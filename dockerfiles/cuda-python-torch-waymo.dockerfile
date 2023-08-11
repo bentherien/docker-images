@@ -5,8 +5,8 @@ FROM ${REPO}:${BASE}
 
 
 
-RUN apt install pigz && \
-    pip install open3d motmetrics==1.1.3 neptune-client transformers matplotlib_venn && \ 
+RUN pip install waymo-open-dataset-tf-2-6-0==1.4.9 && \
+    pip install pandas==1.0 && \
     
 
 # ------------------------------------------------------------------------------

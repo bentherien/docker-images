@@ -273,6 +273,7 @@ main () {
         echo "$docker_cmd\n"
     fi
     echo "Here"
+    echo $docker_cmd
     $docker_cmd
     check_return "Docker command: $docker_cmd"
 }

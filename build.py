@@ -1,15 +1,16 @@
 import sys
 import os
 from configparser import ConfigParser, ExtendedInterpolation
+import argparse
 
-def build(repo, tag):
+def build(repo, tag, cpath):
     config = ConfigParser(interpolation=ExtendedInterpolation())
     print(repo,tag)
-    config.read(f'tags/{tag}.ini')
+    config.read('{}.ini'.format(os.path.join(cpath,tag)))
 
     # Build base image recursively
     if config.has_option('config', 'base'):
-        build(repo, config['config']['base'])
+        build(repo, config['config']['base'],cpath)
     
     dockerfile = f'dockerfiles/{config["config"]["dockerfile"]}'
 
@@ -52,4 +53,19 @@ if __name__ == '__main__':
     print(sys.argv[1])
     print('ok')
     name = sys.argv[1].split(':')
-    build(name[0], name[1])
+
+
+    parser = argparse.ArgumentParser(description="Parser for repo, tag, and cpath fields.")
+
+    parser.add_argument('--repo', type=str, required=True, help='Repository name')
+    parser.add_argument('--tag', type=str, required=True, help='Tag for the repository')
+    parser.add_argument('--cpath', type=str, required=True, help='Path to the configuration file')
+
+    args = parser.parse_args()
+
+    print(f"Repo: {args.repo}")
+    print(f"Tag: {args.tag}")
+    print(f"CPath: {args.cpath}")
+
+
+    build(args.repo, args.tag, args.cpath)
