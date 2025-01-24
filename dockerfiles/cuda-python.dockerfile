@@ -18,7 +18,7 @@ RUN set -x && \
         CONDA_VERSION="py$(echo ${PYTHON_VERSION} | tr -d \.)_${CONDA_VERSION}"; \
     fi && \
     if [ "${UNAME_M}" = "x86_64" ]; then \
-        MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh"; \
+        MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-0-Linux-x86_64.sh"; \
     elif [ "${UNAME_M}" = "s390x" ]; then \
         MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-s390x.sh"; \
     elif [ "${UNAME_M}" = "aarch64" ]; then \

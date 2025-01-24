@@ -3,18 +3,17 @@ ARG BASE
 
 FROM ${REPO}:${BASE}
 
+COPY dockerfiles/setenv.sh /setenv.sh
+ENTRYPOINT ["/setenv.sh"]
+
 # ------------------------------------------------------------------------------
 # PyTorch
 # https://pytorch.org/get-started/locally/
 # ------------------------------------------------------------------------------
 
-RUN pip install --upgrade pip && \
-    pip install --upgrade "jax[cuda11_local]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
-        black \
-        dm-haiku==0.0.9 \
-        pip install mmengine \
-        pip install --no-cache-dir git+https://github.com/lefameuxbeding/learned_optimization \
-        && \
+RUN pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cpu \
+    pip install smart_open && \
+    pip install -U jax chex flax && \
 
 # ------------------------------------------------------------------------------
 # config & cleanup

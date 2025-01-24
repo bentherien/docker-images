@@ -48,6 +48,7 @@ def build(repo, tag, cpath):
     print(f'# Finished \'{tag}\'')
     print('################################################################################')
 
+# python build.py --repo benjamintherien --tag cu12.2.2-py3.11.4 --cpath tags/l2o
 
 if __name__ == '__main__':
     print(sys.argv[1])

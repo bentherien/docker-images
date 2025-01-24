@@ -9,7 +9,7 @@ FROM ${REPO}:${BASE}
 # ------------------------------------------------------------------------------
 
 RUN pip install --upgrade pip && \
-    pip install --upgrade "jax[cuda11_local]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
+    pip install --upgrade "jax[cuda11_local]==0.4.8" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
         black \
         dm-haiku==0.0.9 \
         pip install mmengine \
